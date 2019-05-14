@@ -1,0 +1,15 @@
+* Lucas is thinking of an MVC model. View will only deal with displaying the information that backend works to present in a palatable way. He considers parser to be a part of the Controller. The Controller will give command objects to the model. At a high level, they will have a Command object, and you can't change the command object but you can change its input such that the model can act appropriately. Model will also store information. Because property binding requires the model to know a lot of details about the frontend, Lucas is thinking of a design in which a State object will contain information that the frontend needs to know so that when something changes in the model, they will invoke notify and visualization will respond accordingly. This may or maty not involve calling upon state information.
+* This is flexible because model and view won't be tied to each other in a way that they must mirror each other and contain duplicate information.
+* Another motivation for this is encapsulation benefits as the model will not need to know any information about how its being displayed
+* IF there was a method specific to only the visualzaiion, there would have to be information about the visualization display in backend. There would also need to be a Command Object. Notify is useful because it is flexible to adding this onto the possible commands a user may input.
+* Parser should verify knowing that there is the correct number of arguments, but other errors such as dividing by zero would be determined 
+* Controller would mediate all errors, regardless of whether parser or the actual model figures them out. This is because backend generally sends numbers to frontend.
+* Anna is considering using a more tightly coupled front end and back end, so that specific bindings can be made. In this way, the front end can easily reactively change based on state changes in the back end. 
+* It may be wise to keep the Command object as general as possible. 
+* We are excited to work on creating a recursive and tree structure for commands
+* We are worried about communicating between components, and finding the optimal trade-off between sharing too much and keep things encapsulated. 
+
+## Use Cases
+* Improper number of arguments: Controller receives user inputs, and invokes parser on String input. Should the parser or controller "know" if the inputs are valid here, or does additional checking need to be done by the Model?
+* Communicating a change from the backend to the frontend: There is an important question of where turtlke information should live. Should it live in the model? Should the model simply return values to the Controller? 
+* What if the number of arguments are correct, but the command is invalid for another reason (such as divide by zero): It would be hard for the string parser to catch such an issue. If the Model is detecting the issue, who should tell the View? 
